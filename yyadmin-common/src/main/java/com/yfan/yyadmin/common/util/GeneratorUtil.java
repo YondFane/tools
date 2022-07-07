@@ -5,6 +5,8 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.template.*;
 import com.yfan.yyadmin.common.entity.ColumnInfo;
 import com.yfan.yyadmin.common.entity.GenConfig;
+import com.yfan.yyadmin.common.ftlpath.FtlPathContext;
+import com.yfan.yyadmin.common.ftlpath.FtlPathStrategy;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.util.ObjectUtils;
 
@@ -52,7 +54,11 @@ public class GeneratorUtil {
         PropertiesConfiguration config = GenConfigUtil.getConfig();
         if(config!=null) {
             // 返回配置的临时路径
-            return config.getString("generator.path", GeneratorUtil.SYS_TEM_DIR + GeneratorUtil.YYADMIN_TEMP);
+             String rootPath = config.getString("generator.path", GeneratorUtil.SYS_TEM_DIR + GeneratorUtil.YYADMIN_TEMP);
+             // 如果配置的路径存在
+             if (FileUtil.exist(rootPath)) {
+                 return rootPath;
+             }
         }
         // java系统临时路径
         return GeneratorUtil.SYS_TEM_DIR + GeneratorUtil.YYADMIN_TEMP;
@@ -394,69 +400,10 @@ public class GeneratorUtil {
         if  (!ObjectUtils.isEmpty(genConfig.getPackModule())) {
             packageModulePath += genConfig.getPackModule().replace(".", File.separator) + File.separator;
         }
-
-        if ("Entity".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "entity" + File.separator + className + ".java";
-            }
-            return packageModulePath + "entity" + File.separator + className + ".java";
-        }
-
-        if ("Controller".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "controller" + File.separator + className + "Controller.java";
-            }
-            return packageModulePath + "controller" + File.separator + className + "Controller.java";
-        }
-
-        if ("Service".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "service" + File.separator + className + "Service.java";
-            }
-            return packageModulePath + "service" + File.separator + className + "Service.java";
-        }
-
-
-        if ("ServiceImpl".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
-            }
-            return packageModulePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
-        }
-
-        if ("Dto".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "service" + File.separator + "dto" + File.separator + className + "Dto.java";
-            }
-            return packageModulePath + "service" + File.separator + "dto" + File.separator + className + "Dto.java";
-        }
-
-        if ("QueryCriteria".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "service" + File.separator + "dto" + File.separator + className + "QueryCriteria.java";
-            }
-            return packageModulePath + "service" + File.separator + "dto" + File.separator + className + "QueryCriteria.java";
-        }
-
-        if ("Mapper".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "service" + File.separator + "mapstruct" + File.separator + className + "Mapper.java";
-            }
-            return packageModulePath + "service" + File.separator + "mapstruct" + File.separator + className + "Mapper.java";
-        }
-
-        if ("Dao".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "dao" + File.separator + className + "Dao.java";
-            }
-            return packageModulePath + "dao" + File.separator + className + "Dao.java";
-        }
-
-        if ("DaoImpl".equals(templateName)) {
-            if (packagePath.equals(packageModulePath)) {
-                return packagePath + "dao" + File.separator + className + "DaoImpl.java";
-            }
-            return packageModulePath + "dao" + File.separator + "impl" + File.separator + className + "DaoImpl.java";
+        // 获取模板对应的文件路径
+        FtlPathStrategy ftlPathStrategy = FtlPathContext.getFtlPathStrategy(templateName);
+        if (ftlPathStrategy != null) {
+            return ftlPathStrategy.getFtlPath(className, packagePath, packageModulePath);
         }
         return null;
     }
