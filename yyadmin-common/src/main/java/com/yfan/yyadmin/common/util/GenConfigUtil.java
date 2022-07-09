@@ -12,15 +12,19 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 @Slf4j
 public class GenConfigUtil {
 
+    private static PropertiesConfiguration config;
+
     /**
      * 获取配置信息
      */
     public static PropertiesConfiguration getConfig() {
         try {
-            return new PropertiesConfiguration("generator.properties");
+            if (config == null) {
+                config = new PropertiesConfiguration("generator.properties");
+            }
         } catch (ConfigurationException e) {
             log.error(e.getMessage(), e);
         }
-        return null;
+        return config;
     }
 }
