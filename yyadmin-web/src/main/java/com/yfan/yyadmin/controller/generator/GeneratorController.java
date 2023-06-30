@@ -35,9 +35,6 @@ public class GeneratorController {
     @ResponseBody
     @RequestMapping("/list")
     public Object list(@RequestParam Map<String, Object> params) {
-        /*PageUtils pageUtil = sysGeneratorService.queryList(new Query(params));
-        generatorService.
-        return R.ok().put("page", pageUtil);*/
         List<TableInfo> mapPageInfo = generatorService.queryList(params);
         return mapPageInfo;
     }

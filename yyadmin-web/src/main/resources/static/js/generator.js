@@ -55,7 +55,17 @@ var vm = new Vue({
                 return ;
             }
             location.href = "yyadmin/generator/code?tables=" + tableNames.join();
-		}
+		},
+        testButton:function (){
+            $.alert({
+
+                title: '标题',
+
+                content: '内容',
+
+            });
+        }
+
 	}
 });
 
