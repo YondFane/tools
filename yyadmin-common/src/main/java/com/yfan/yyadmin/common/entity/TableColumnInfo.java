@@ -24,5 +24,7 @@ public class TableColumnInfo {
     private String columnKey;
     // auto_increment
     private String extra;
+    // 字段类型
+    private String columnType;
 
 }

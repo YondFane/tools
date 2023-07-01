@@ -144,6 +144,7 @@ public class GeneratorUtil {
     public static String generatorFile(List<ColumnInfo> columns, GenConfig genConfig) throws IOException {
         // 拼接路径
         String tempPath = getGenTempPath() + File.separator + genConfig.getTableName() + File.separator;
+        // 获取参数
         Map<String, Object> genMap = getGenMap(columns, genConfig);
         TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig("template", TemplateConfig.ResourceMode.CLASSPATH));
         // 生成后端代码
@@ -280,7 +281,7 @@ public class GeneratorUtil {
             // 字段类型
             listMap.put("columnKey", column.getKeyType());
             // 主键类型
-            String colType = ColUtil.cloToJava(column.getColumnType());
+            String colType = ColUtil.cloToJava(column.getDataType());
             // 小写开头的字段名
             String changeColumnName = StringUtil.toCamelCase(column.getColumnName());
             // 大写开头的字段名
@@ -313,6 +314,10 @@ public class GeneratorUtil {
                     dicts.add(column.getDictName());
             }
 
+            // tinyint(1) 默认 Boolean
+            if ("tinyint(1)".equals(column.getColumnType())) {
+                colType = "Boolean";
+            }
             // 存储字段类型
             listMap.put("columnType", colType);
             // 存储字原始段名称

@@ -74,7 +74,7 @@ public class GeneratorService {
             List<ColumnInfo> columnInfoList = new ArrayList<>();
             tableColumnInfos.forEach(tableColumnInfo -> {
                 ColumnInfo columnInfo = new ColumnInfo(tableInfo.getTableName(), tableColumnInfo.getColumnName(),
-                        true, tableColumnInfo.getDataType(), tableColumnInfo.getColumnComment(),
+                        true, tableColumnInfo.getDataType(),tableColumnInfo.getColumnType(), tableColumnInfo.getColumnComment(),
                         tableColumnInfo.getColumnKey(), tableColumnInfo.getExtra());
                 columnInfoList.add(columnInfo);
             });

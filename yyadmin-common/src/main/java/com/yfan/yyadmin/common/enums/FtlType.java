@@ -14,7 +14,7 @@ public enum FtlType {
     ENTITY("ENTITY","控制层类"),
     DAO("DAO","数据访问接口"),
     DAOIMPL("DAOIMPL","数据访问实现类"),
-    SERVICE("SERICE","业务接口"),
+    SERVICE("SERVICE","业务接口"),
     SERVICEIMPL("SERVICEIMPL","业务实现类"),
     DTO("DTO","传输类"),
     MAPPER("MAPPER","MAPPER"),

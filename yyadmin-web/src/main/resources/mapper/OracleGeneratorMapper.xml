@@ -24,7 +24,7 @@
 	<select id="queryColumns" resultType="tableColumnInfo">
         select temp.column_name columnname,
         temp.data_type dataType,
-        nvl(temp.comments,' ') columnComment,
+        nvl(temp.comments,' ') columnComment,nvl('') columnType,
         case temp.constraint_type when 'P' then 'PRI' when 'C' then 'UNI' else ' ' end "COLUMNKEY",
         'NULL' "EXTRA"
         from (

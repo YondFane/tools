@@ -38,6 +38,9 @@ public class ColumnInfo implements Serializable {
     private String columnName;
 
     // 数据库字段类型
+    private String dataType;
+
+    // 数据库字段类型
     private String columnType;
 
     // 数据库字段键类型
@@ -70,11 +73,12 @@ public class ColumnInfo implements Serializable {
     // 日期注解
     private String dateAnnotation;
 
-    public ColumnInfo(String tableName, String columnName, Boolean notNull,
+    public ColumnInfo(String tableName, String columnName, Boolean notNull, String dataType,
                       String columnType, String remark, String keyType, String extra) {
         this.tableName = tableName;
         this.columnName = columnName;
         this.columnType = columnType;
+        this.dataType = dataType;
         this.keyType = keyType;
         this.extra = extra;
         this.notNull = notNull;

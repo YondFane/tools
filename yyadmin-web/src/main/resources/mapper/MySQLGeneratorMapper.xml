@@ -20,7 +20,7 @@
 	</select>
 
 	<select id="queryColumns" resultType="tableColumnInfo">
-		select column_name columnName, data_type dataType, column_comment columnComment,
+		select column_name columnName, data_type dataType, column_comment columnComment,COLUMN_TYPE columnType,
 		       column_key columnKey, extra
 		from information_schema.columns
 		where table_name = #{tableName} and table_schema = (select database()) order by ordinal_position
@@ -42,7 +42,7 @@
 	</select>
 
 	<select id="queryColumnsMap" resultType="map">
-		select column_name columnName, data_type dataType, column_comment columnComment,
+		select column_name columnName, data_type dataType, column_comment columnComment,,COLUMN_TYPE columnType,
 			   column_key columnKey, extra
 		from information_schema.columns
 		where table_name = #{tableName} and table_schema = (select database()) order by ordinal_position
