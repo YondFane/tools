@@ -1,81 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>YYAdmin</title>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/AdminLTE.min.css">
-  <link rel="stylesheet" href="css/all-skins.min.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/jquery-confirm.3.3.4.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tools</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/all-skins.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery-confirm.3.3.4.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper" id="rrapp" v-cloak>
-  <header class="main-header">
-    <!-- LOG区域 -->
-    <a href="javascript:void(0);" class="logo">
-      <span class="logo-lg"><b>YYAdmin</b></span>
-    </a>
-    <!-- 导航栏 -->
-    <nav class="navbar navbar-static-top" role="navigation">
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-	  <div style="float:left;color:#fff;padding:15px 10px;">代码生成</div>
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- 预留按钮位置 -->
-		</ul>
-      </div>
-    </nav>
-  </header>
+    <header class="main-header">
+        <!-- LOG区域 -->
+        <a href="javascript:void(0);" class="logo">
+            <span class="logo-lg"><b>Tools</b></span>
+        </a>
 
-  <!-- 左边布局 -->
-  <aside class="main-sidebar">
-    <section class="sidebar">
-      <ul class="sidebar-menu">
-        <li class="header">导航菜单</li>
-          <li class="active">
-              <a href="javascript:;"><i class="fa fa-cog"></i><span>代码生成器</span><i class="fa fa-angle-left pull-right"></i></a>
-              <ul class="treeview-menu menu-open" style="display: block;">
-                  <li class="active"><a href="#welcome.html"><i class="fa fa-rocket"></i>欢迎</a></li>
-                  <li><a href="#generator.html"><i class="fa fa-rocket"></i>控制台</a></li>
-                  <li><a href="#generator2.html"><i class="fa fa-rocket"></i>控制台2</a></li>
-              </ul>
-          </li>
-      </ul>
-    </section>
-  </aside>
+        <!-- 导航栏 -->
+        <nav class="navbar navbar-static-top" role="navigation" style="max-height: 50px;">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <div style="float:left;color:#fff;padding:15px 10px;"></div>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- 预留按钮位置 -->
+            </ul>
+          </div>
+        </nav>
+    </header>
 
-  <!-- 右边布局 -->
-  <div class="content-wrapper">
-    <section class="content-header">
-      <ol class="breadcrumb" id="nav_title" style="position:static;float:none;">
-        <li class="active"><i class="fa fa-home" style="font-size:20px;position:relative;top:2px;left:-3px;"></i> &nbsp; 首页</li>
-        <li class="active">{{navTitle}}</li>
-      </ol>
-    </section>
+    <!-- 左边布局 -->
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="header">导航菜单</li>
+                <li class="active">
+                    <a href="javascript:;"><i class="fa fa-cog"></i><span>代码生成器</span><i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu menu-open" style="display: block;">
+                        <li class="active"><a href="#welcome.html"><i class="fa fa-rocket"></i>数据源配置</a></li>
+                        <li><a href="#generator2.html"><i class="fa fa-rocket"></i>模板配置</a></li>
+                        <li><a href="#generator-vue.html"><i class="fa fa-rocket"></i>代码生成</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </aside>
 
-    <!-- 主容器 显示主要内容 -->
+    <!-- 右边布局 -->
+    <div class="content-wrapper">
+        <section class="content-header">
+            <ol class="breadcrumb" id="nav_title" style="position:static;float:none;">
+                <li class="active"><i class="fa fa-home"style="font-size:20px;position:relative;top:2px;left:-3px;"></i>
+                    &nbsp; 首页 >
+                    {{navTitle}}
+                </li>
+            </ol>
+        </section>
 
-    <section class="content" style="background:#fff;">
-      <iframe scrolling="yes" frameborder="0" style="width:100%;min-height:200px;overflow:visible;background:#fff;" :src="main"></iframe>
-    </section>
-  </div>
+        <!-- 主容器 显示主要内容 -->
 
-  <!-- 页脚 -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-       Power for YFAN
+        <section class="content" style="background:#fff;">
+            <iframe scrolling="yes" frameborder="0"
+                    style="width:100%;min-height:200px;overflow:visible;background:#fff;" :src="main"></iframe>
+        </section>
     </div>
-  </footer>
+
+    <!-- 页脚 -->
+    <!--<footer class="main-footer">
+      <div class="pull-right hidden-xs">
+         Power for YFAN
+      </div>-->
+    </footer>
 
 
-  <div class="control-sidebar-bg"></div>
-  
+    <div class="control-sidebar-bg"></div>
 
 
 </div>

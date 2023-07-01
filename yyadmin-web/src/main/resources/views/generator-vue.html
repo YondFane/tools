@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>代码生成器</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery-confirm.3.3.4.min.css">
+    <script src="libs/jquery.min.js"></script>
+    <script src="plugins/layer/layer.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/vue.min.js"></script>
+    <script src="plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="libs/jquery-confirm.3.3.4.min.js"></script>
+
+
+    <link rel="stylesheet" href="css/bootstrap-vue.min.css">
+    <!--    <script src="libs/polyfill.js"></script>-->
+    <script src="libs/bootstrap-vue.min.js"></script>
+    <script src="libs/axios.min.js"></script>
+    <script src="libs/bootstrap-vue-icons.min.js"></script>
+
+</head>
+<body>
+
+<div id="dataTable">
+    <div>
+                <b-form-input class="mr-sm-2" v-model="q.tableName" @keyup.enter="query" placeholder="表名" style = "width: 300px;display: inline;"></b-form-input>
+                <b-button @click="query" variant="outline-success" class="my-2 my-sm-0" >查询</b-button>
+                <b-button @click="generator" variant="outline-primary" class="my-2 my-sm-0">生成代码</b-button>
+    </div>
+    <div>
+        <b-table
+                :items="items"
+                :fields="fields"
+                :select-mode="selectMode"
+                responsive="sm"
+                ref="selectableTable"
+                selectable
+                @row-selected="onRowSelected"
+        >
+            <!-- Example scoped slot for select state illustrative purposes -->
+            <template #cell(selected)="{ rowSelected }">
+                <template v-if="rowSelected">
+                    <span aria-hidden="true">&check;</span>
+                    <span class="sr-only">Selected</span>
+                </template>
+                <template v-else>
+                    <span aria-hidden="true">&nbsp;</span>
+                    <span class="sr-only">Not selected</span>
+                </template>
+            </template>
+        </b-table>
+    </div>
+</div>
+
+</body>
+<script src="js/generator-vue.js"></script>
+
+</html>

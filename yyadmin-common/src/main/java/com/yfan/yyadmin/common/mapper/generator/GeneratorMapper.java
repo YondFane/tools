@@ -22,6 +22,7 @@ public interface GeneratorMapper {
      * @date: 2022/7/2/002 16:32
      **/
     List<TableInfo> queryList(Map<String, Object> params);
+
     List<Map<String,Object>> queryListMap(Map<String, Object> params);
     /**
      *
