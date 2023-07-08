@@ -9,7 +9,7 @@ var dataTableVue = new Vue({
         return {
             modes: ['multi', 'single', 'range'],
             q: {
-                tableName: null
+                dbName: null
             },
             fields: [
                 {
@@ -17,36 +17,40 @@ var dataTableVue = new Vue({
                     label: '选择'
                 },
                 {
-                    key: 'tableName',
-                    label: '数据表名'
+                    key: 'dbName',
+                    label: '数据源名称'
                 },
                 {
-                    key: 'tableComment',
-                    label: '数据表注释'
+                    key: 'driverClassName',
+                    label: '驱动名称'
                 },
                 {
-                    key: 'engine',
-                    label: '数据库引擎'
+                    key: 'jdbcUrl',
+                    label: '数据库链接'
                 },
                 {
-                    key: 'createTime',
-                    label: '创建时间'
+                    key: 'username',
+                    label: '用户名称'
+                },
+                {
+                    key: 'password',
+                    label: '用户密码'
                 }],
             items: [
                 /*{
-                    "tableName": "zhuanjia_yaoqing_jilu2",
+                    "dbName": "zhuanjia_yaoqing_jilu2",
                     "engine": "InnoDB",
                     "tableComment": "专家邀请记录表",
                     "createTime": "2022-09-25 15:44:11"
                 }*/
             ],
-            selectMode: 'multi',
-            selected: []
+            selectMode: 'single',
+            selected: [],
+            currentDbName:''
         }
     },
     methods: {
         created() {
-
             console.log(123);
         },
         onRowSelected(items) {
@@ -70,29 +74,50 @@ var dataTableVue = new Vue({
             var that = this;
             axios({
                 method: 'get',
-                url: '/yyadmin/generator/list',
+                url: '/yyadmin/db/list',
                 data: {},
-                params: {'tableName': this.q.tableName}
+                params: {'dbName': this.q.dbName}
             }).then(function (response) {
+                $.each(response.data,function (index, item) {
+                    if (item.selected) {
+                        that.currentDbName = item.dbName;
+                    }
+                });
                 that.items = response.data;
+
             }).catch(function (error) {
                 console.log(error);
             });
             console.log(this);
         },
-        generator: function () {
-            var tableNames = [];
+        confirmDataSource: function () {
+            var dbName = "";
             $.each(this.selected, function (index, item) {
-                tableNames.push(item.tableName);
+                dbName = item.dbName;
             })
-            if (tableNames.length == 0) {
+            /*if (!dbName) {
                 $.alert({
                     title: '提示',
-                    content: '请选择至少一条记录'
+                    content: '请选择一条记录'
                 });
                 return;
-            }
-            location.href = "yyadmin/generator/code?tables=" + tableNames.join();
+            }*/
+            axios({
+                method: 'post',
+                url: '/yyadmin/db/change',
+                data: {},
+                params: {
+                    dbName:dbName
+                }
+            }).then(function (response) {
+                $.alert({
+                    title: '提示',
+                    content: response.data
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+            this.query();
         }
     },
     // 初始化前，注意在 beforeCreate 生命周期函数执行的时候，data 和 methods 中的 属性与方法定义都还没有没初始化
@@ -107,10 +132,15 @@ var dataTableVue = new Vue({
         var that = this;
         axios({
             method: 'get',
-            url: '/yyadmin/generator/list',
+            url: '/yyadmin/db/list',
             data: {}
         }).then(function (response) {
             that.items = response.data;
+            $.each(response.data,function (index, item) {
+                if (item.selected) {
+                    that.currentDbName = item.dbName;
+                }
+            });
         }).catch(function (error) {
             console.log(error);
         });

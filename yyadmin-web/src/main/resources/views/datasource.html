@@ -31,9 +31,37 @@
 </head>
 <body>
 <div class="panel panel-default">
-    <div class="panel-heading">Welocome</div>
-    <div style="padding: 10px 0 20px 10px;">
-        <h1>Welocome</h1>
+    <div id = "dataTable">
+        <div>
+            <b-form-input class="mr-sm-2" v-model="q.dbName" @keyup.enter="query" placeholder="表名"
+                          style="width: 300px;display: inline;"></b-form-input>
+            <b-button @click="query" variant="outline-success" class="my-2 my-sm-0">查询</b-button>
+            <b-button @click="confirmDataSource" variant="outline-primary" class="my-2 my-sm-0">确认数据源</b-button>
+            <b-button style ="position: absolute;right: 10px;" disabled variant="dark" class="my-2 my-sm-0">当前数据源 {{currentDbName}}</b-button>
+        </div>
+        <div>
+            <b-table
+                    :items="items"
+                    :fields="fields"
+                    :select-mode="selectMode"
+                    responsive="sm"
+                    ref="selectableTable"
+                    selectable
+                    @row-selected="onRowSelected"
+            >
+                <!-- Example scoped slot for select state illustrative purposes -->
+                <template #cell(selected)="{ rowSelected }">
+                    <template v-if="rowSelected">
+                        <span aria-hidden="true">&check;</span>
+                        <span class="sr-only">Selected</span>
+                    </template>
+                    <template v-else>
+                        <span aria-hidden="true">&nbsp;</span>
+                        <span class="sr-only">Not selected</span>
+                    </template>
+                </template>
+            </b-table>
+        </div>
     </div>
 </div>
 </body>

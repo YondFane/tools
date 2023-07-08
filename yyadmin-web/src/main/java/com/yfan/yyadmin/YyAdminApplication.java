@@ -2,6 +2,7 @@ package com.yfan.yyadmin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  *
@@ -9,7 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author: YFAN
  * @date: 2022/7/3/003 16:27
  **/
-@SpringBootApplication
+//@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class YyAdminApplication {
 
     public static void main(String[] args) {
