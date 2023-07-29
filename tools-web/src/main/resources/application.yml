@@ -1,0 +1,45 @@
+server:
+  port: 8888
+
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/,classpath:/views/
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+#    MySQL配置
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: root
+    db1:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/test2?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+    db2:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+    #oracle配置
+#    driverClassName: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@localhost:1521:orcl
+#    username: scott
+#    password: 123456
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.yfan.tools.common.entity
+
+#pagehelper分页配置
+#pagehelper:
+#  helperDialect: ${current.datasource}
+#  reasonable: true
+#  supportMethodsArguments: true
+#  params: count=countSql
+
+# 当前数据源 mysql oracle
+current:
+  datasource: mysql

@@ -10,16 +10,16 @@
     </parent>
 
     <groupId>com.yfan</groupId>
-    <artifactId>yyAdmin</artifactId>
+    <artifactId>tools</artifactId>
     <version>1.0.0</version>
-    <name>yyAdmin</name>
-    <description>yyAdmin</description>
+    <name>tools</name>
+    <description>tools</description>
     <packaging>pom</packaging>
 
     <modules>
-        <module>yyadmin-web</module>
-        <module>yyadmin-common</module>
-        <module>yyadmin-generator</module>
+        <module>tools-web</module>
+        <module>tools-common</module>
+        <module>tools-generator</module>
     </modules>
 
     <properties>
