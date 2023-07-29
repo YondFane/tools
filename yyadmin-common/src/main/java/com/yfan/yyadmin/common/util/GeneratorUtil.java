@@ -71,7 +71,7 @@ public class GeneratorUtil {
      * @author: YFAN
      * @date: 2022/7/3/003 14:08
      **/
-    private static String getFtlTemplateScheme() {
+    public static String getFtlTemplateScheme() {
         PropertiesConfiguration config = GenConfigUtil.getConfig();
         if(config!=null) {
             // 默认使用一套

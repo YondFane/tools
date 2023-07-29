@@ -41,6 +41,11 @@ public class DataSourceController {
 
     private Setting setting = null;
 
+    /**
+     * @description: 数据源配置加载初始化
+     * @author: YFAN
+     * @date: 2023/7/29/029 19:45
+     **/
     @PostConstruct
     public void init() throws Exception {
         // 加载数据源配置文件
@@ -67,6 +72,11 @@ public class DataSourceController {
 
     }
 
+    /**
+     * @description: 销毁时将数据源配置持久化
+     * @author: YFAN
+     * @date: 2023/7/29/029 19:44
+     **/
     @PreDestroy
     public void store() {
         // 程序退出进行持久化操作

@@ -3,89 +3,16 @@ $(function () {
 });
 
 var dataTableVue = new Vue({
-    el: "#dataTable",
+    el: "#app",
     data: function () {
         return {
-            modes: ['multi', 'single', 'range'],
             q: {
                 dbName: null
             },
-            fields: [
-                {
-                    key: 'selected',
-                    label: '选择'
-                },
-                {
-                    key: 'dbName',
-                    label: '数据源名称'
-                },
-                {
-                    key: 'driverClassName',
-                    label: '驱动名称'
-                },
-                {
-                    key: 'jdbcUrl',
-                    label: '数据库链接'
-                },
-                {
-                    key: 'username',
-                    label: '用户名称'
-                },
-                {
-                    key: 'password',
-                    label: '用户密码'
-                }],
-            items: [
-                /*{
-                    "dbName": "zhuanjia_yaoqing_jilu2",
-                    "engine": "InnoDB",
-                    "tableComment": "专家邀请记录表",
-                    "createTime": "2022-09-25 15:44:11"
-                }*/
-            ],
-            selectMode: 'single',
-            selected: [],
-            currentDbName:''
+            data:{}
         }
     },
     methods: {
-        created() {
-        },
-        onRowSelected(items) {
-            this.selected = items
-        },
-        selectAllRows() {
-            this.$refs.selectableTable.selectAllRows()
-        },
-        clearSelected() {
-            this.$refs.selectableTable.clearSelected()
-        },
-        selectThirdRow() {
-            this.$refs.selectableTable.selectRow(2)
-        },
-        unselectThirdRow() {
-            this.$refs.selectableTable.unselectRow(2)
-        },
-        query: function () {
-            var that = this;
-            axios({
-                method: 'get',
-                url: '/yyadmin/db/list',
-                data: {},
-                params: {'dbName': this.q.dbName}
-            }).then(function (response) {
-                $.each(response.data,function (index, item) {
-                    if (item.selected) {
-                        that.currentDbName = item.dbName;
-                    }
-                });
-                that.items = response.data;
-
-            }).catch(function (error) {
-                console.log(error);
-            });
-            console.log(this);
-        },
         confirmDataSource: function () {
             var that = this;
             var dbName = "";
@@ -125,19 +52,14 @@ var dataTableVue = new Vue({
     // 初始化，data 和 methods 都已经被初始化好了
     created: function () {
         console.log('初始化');
-        console.log(this);
         var that = this;
         axios({
             method: 'get',
-            url: '/yyadmin/db/list',
+            url: '/yyadmin/modelsetting/queryData',
             data: {}
         }).then(function (response) {
-            that.items = response.data;
-            $.each(response.data,function (index, item) {
-                if (item.selected) {
-                    that.currentDbName = item.dbName;
-                }
-            });
+            console.log(response);
+            that.data = response.data;
         }).catch(function (error) {
             console.log(error);
         });

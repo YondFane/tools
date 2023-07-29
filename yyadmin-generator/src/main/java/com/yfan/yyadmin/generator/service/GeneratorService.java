@@ -35,7 +35,6 @@ public class GeneratorService {
 
     /**
      * 查询数据表表
-     *
      * @param query
      * @return: java.util.List<java.util.Map < java.lang.String, java.lang.Object>>
      * @author: YFAN
@@ -71,6 +70,7 @@ public class GeneratorService {
             List<TableColumnInfo> tableColumnInfos = queryColumns(tableName);
             // 配置信息
             GenConfig config = new GenConfig(tableName, tableInfo.getTableComment());
+            // 查询数据表字段信息
             List<ColumnInfo> columnInfoList = new ArrayList<>();
             tableColumnInfos.forEach(tableColumnInfo -> {
                 ColumnInfo columnInfo = new ColumnInfo(tableInfo.getTableName(), tableColumnInfo.getColumnName(),
@@ -105,11 +105,6 @@ public class GeneratorService {
     public TableInfo queryTable(String tableName) {
         return generatorMapper.queryTable(tableName);
     }
-
-    public Map<String, String> queryTableMap(String tableName) {
-        return generatorMapper.queryTableMap(tableName);
-    }
-
     /**
      * 查询列信息
      *
@@ -120,9 +115,5 @@ public class GeneratorService {
      **/
     public List<TableColumnInfo> queryColumns(String tableName) {
         return generatorMapper.queryColumns(tableName);
-    }
-
-    public List<Map<String, String>> queryColumnsMap(String tableName) {
-        return generatorMapper.queryColumnsMap(tableName);
     }
 }

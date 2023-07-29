@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>代码生成器</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/jquery-confirm.3.3.4.min.css">
+    <script src="libs/jquery.min.js"></script>
+    <script src="plugins/layer/layer.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/vue.min.js"></script>
+    <script src="plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="libs/jquery-confirm.3.3.4.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap-vue.min.css">
+    <!--    <script src="libs/polyfill.js"></script>-->
+    <script src="libs/bootstrap-vue.min.js"></script>
+    <script src="libs/axios.min.js"></script>
+    <script src="libs/bootstrap-vue-icons.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@3.0.0/marked.min.js"></script>
+</head>
+<body>
+<div id="rrapp">
+    <div id="app">
+        <b-tabs
+                active-nav-item-class="font-weight-bold text-uppercase text-danger"
+                active-tab-class="font-weight-bold text-success"
+                content-class="mt-3"
+        >
+            <b-tab title="Entity" active v-if="data.Entity"><p  v-html="data.Entity"></p></b-tab>
+            <b-tab title="Dto" v-if="data.Dto"><p v-html="data.Dto"></p></b-tab>
+            <b-tab title="Dao" v-if="data.Dao"><p v-html="data.Dao"></p></b-tab>
+            <b-tab title="DaoImpl" v-if="data.DaoImpl"><p v-html="data.DaoImpl"></p></b-tab>
+            <b-tab title="Service" v-if="data.Service"><p v-html="data.Service"></p></b-tab>
+            <b-tab title="ServiceImpl" v-if="data.ServiceImpl"><p v-html="data.ServiceImpl"></p></b-tab>
+            <b-tab title="Controller" v-if="data.Controller"><p v-html="data.Controller"></p></b-tab>
+        </b-tabs>
+    </div>
+</div>
+
+<script src="js/modelsetting.js"></script>
+</body>
+</html>

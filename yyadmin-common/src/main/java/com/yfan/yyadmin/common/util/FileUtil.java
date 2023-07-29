@@ -1,6 +1,7 @@
 package com.yfan.yyadmin.common.util;
 
 import cn.hutool.core.io.IoUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +17,10 @@ import java.io.IOException;
 *@Author: YFAN
 *@CreateTime: 2022-07-03 12:46
 */
+@Slf4j
 public class FileUtil extends cn.hutool.core.io.FileUtil {
 
-
     /**
-     *
      * 下载
      * @param file
      * @param request
@@ -32,13 +32,19 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
     public static void  downLoad(File file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(file);
         ServletOutputStream outputStream = response.getOutputStream();
-
-        response.setCharacterEncoding(request.getCharacterEncoding());
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
-        IoUtil.copy(fileInputStream, outputStream);
-        IoUtil.close(fileInputStream);
-        IoUtil.close(outputStream);
+        try {
+            fileInputStream = new FileInputStream(file);
+            outputStream = response.getOutputStream();
+            response.setCharacterEncoding(request.getCharacterEncoding());
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+            IoUtil.copy(fileInputStream, outputStream);
+        } catch (Exception e) {
+            log.error("e");
+        } finally {
+            IoUtil.close(fileInputStream);
+            IoUtil.close(outputStream);
+        }
     }
 
 }
