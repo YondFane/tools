@@ -90,8 +90,6 @@ public class GeneratorService {
         ZipUtil.zip(zipFile, true, filePaths);
         // 下载
         FileUtil.downLoad(zipFile, request, response);
-        //删除文件
-        FileUtil.del(zipFile);
     }
 
     /**
