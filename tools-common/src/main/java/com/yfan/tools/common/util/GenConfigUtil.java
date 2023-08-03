@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
+import java.io.FileReader;
+
 /**
  * generator.properties配置类
  * @Author: YFAN
@@ -20,9 +22,11 @@ public class GenConfigUtil {
     public static PropertiesConfiguration getConfig() {
         try {
             if (config == null) {
-                config = new PropertiesConfiguration("generator.properties");
+                //config = new PropertiesConfiguration("/config/generator.properties");
+                config  = new PropertiesConfiguration();
+                config.load(new FileReader(System.getProperty("user.dir")  + "/config/generator.properties"));
             }
-        } catch (ConfigurationException e) {
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
         return config;

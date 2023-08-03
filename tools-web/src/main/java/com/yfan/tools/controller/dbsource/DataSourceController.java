@@ -50,7 +50,13 @@ public class DataSourceController {
     public void init() throws Exception {
         // 加载数据源配置文件
         log.info("数据源配置加载开始");
-        setting = new Setting("datasource.setting");
+        String userDir = System.getProperty("user.dir");
+        log.info("userDir:{}", userDir);
+        if (StrUtil.isNotBlank(userDir)) {
+            setting = new Setting(userDir + "/config/datasource.setting");
+        } else {
+            setting = new Setting("datasource.setting");
+        }
         String groups = setting.get("groups");
         log.info("groups:{}", groups);
         String[] groupArray = groups.split(",");

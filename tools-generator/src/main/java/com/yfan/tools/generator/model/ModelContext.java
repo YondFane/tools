@@ -1,25 +1,19 @@
 package com.yfan.tools.generator.model;
 
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.extra.template.Template;
-import cn.hutool.extra.template.TemplateConfig;
-import cn.hutool.extra.template.TemplateEngine;
-import cn.hutool.extra.template.TemplateUtil;
-import com.yfan.tools.common.util.FileUtil;
 import com.yfan.tools.common.util.GenConfigUtil;
 import com.yfan.tools.common.util.GeneratorUtil;
-import lombok.extern.apachecommons.CommonsLog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,15 +50,22 @@ public class ModelContext {
                     for (String templateName : splitFtlTemplates) {
                         BufferedReader bufferedReader = null;
                         try {
-                            File file = ResourceUtils.getFile("classpath:template/" + ftltemplateScheme + templateName + ".ftl");
-                            bufferedReader = new BufferedReader(new FileReader(file));
+                            // IDEA中可以使用，Jar不能用
+                            /*File file = ResourceUtils.getFile("classpath:template/" + ftltemplateScheme + templateName + ".ftl");
+                            bufferedReader = new BufferedReader(inputStreamReader);*/
+                            // 正确方式
+                            ClassPathResource classPathResource = new ClassPathResource("template/" + ftltemplateScheme + templateName + ".ftl");
+                            InputStream inputStream = classPathResource.getInputStream();
+                            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                            bufferedReader = new BufferedReader(inputStreamReader);
+
                             StringBuilder stringBuilder = new StringBuilder();
                             while (bufferedReader.ready()) {
                                 stringBuilder.append(bufferedReader.readLine());
                                 stringBuilder.append("<br/>");
                             }
-                            System.out.println(stringBuilder.toString());
-                            System.out.println();
+                            log.info(templateName + "---加载完成");
+                            log.info(stringBuilder.toString());
                             modelMap.put(templateName, stringBuilder.toString());
                             modelMapTemp.put(templateName, stringBuilder.toString());
                         } catch (Exception e) {
